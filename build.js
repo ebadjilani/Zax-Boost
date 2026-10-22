@@ -71,19 +71,42 @@ const ingredients = [
 const ctaBand = (up, h = 'Ready to get <span class="metal">Zaxy?</span>') => `
 <section class="section cta-band"><div class="bg-word" aria-hidden="true" data-speed=".05">ZAXY</div>${bolt('left:6%;top:12%;width:90px;opacity:.5', '.1')}${bolt('right:8%;bottom:10%;width:120px;opacity:.35;transform:scaleX(-1)', '-.06')}
 <div class="wrap"><h2 data-split>${h}</h2><div class="btn-row reveal d1"><a class="btn" href="${up}distributor/">Become a Distributor</a><a class="btn ghost" href="${up}product/">Explore the Product</a></div></div></section>`;
-const pageHero = (up, eyebrow, h, lead, word, vid = 'video-c.mp4', poster = 'hero-splash-1.png') => `<section class="page-hero">${pv(up, vid, poster)}<div class="bg-word" aria-hidden="true" data-speed=".06">${word}</div>${bolt('right:12%;top:16%;width:70px;opacity:.55', '.12')}
+const pageHero = (up, eyebrow, h, lead, word, vid = 'video-c.mp4', poster = 'product-pedestal.png') => `<section class="page-hero">${pv(up, vid, poster)}<div class="bg-word" aria-hidden="true" data-speed=".06">${word}</div>${bolt('right:12%;top:16%;width:70px;opacity:.55', '.12')}
 <div class="wrap"><div class="eyebrow">${eyebrow}</div><h1 data-split data-now>${h}</h1><p class="lead reveal d2">${lead}</p></div></section>`;
 const ingrCards = `<div class="ingr-grid">${ingredients.map(([n, t], i) => `<article class="ingr-card reveal d${Math.min(i, 3)}"><span class="num" aria-hidden="true">0${i + 1}</span><svg class="ib" viewBox="0 0 100 160" aria-hidden="true"><path d="M62 0 8 92h36L28 160 94 58H57z"/></svg><h3>${n}</h3><p>${t}</p></article>`).join('')}</div>`;
-const railItems = [
-  ['hero-splash-1.png', 0, 'Golden eruption', 'ZAX BOOST can erupting from golden liquid and black rock'],
-  ['double-can-splash.png', 596 / 498, 'Double up', 'Two ZAX BOOST cans in a liquid splash'],
-  ['macro-can-detail.png', 424 / 498, 'The detail', 'Close-up of a cold ZAX BOOST can lid'],
-  ['hands-toasting.png', 394 / 518, 'Make it a moment', 'Two hands toasting ZAX BOOST cans'],
-  ['product-pedestal.png', 381 / 518, 'On the rocks', 'ZAX BOOST can on a black stone pedestal'],
-  ['ice-splash-action.png', 372 / 518, 'Ice cold', 'ZAX BOOST can mid-splash with ice cubes'],
-  ['product-on-ice.png', 503 / 498, 'Chilled', 'ZAX BOOST can on ice with golden splash']
+// Campaign slider. Each slide is a distinct concept. type: 'frame' = framed product image over its own soft backdrop; 'wide' = full-bleed.
+// Optional slots: if you drop one of these files into assets/images/ and rebuild, the slide appears automatically.
+const OPTIONAL = {
+  'lifestyle-person.jpg': { type: 'wide', dir: 'right', eyebrow: 'After dark', title: 'Own the night.', text: 'A person, a can, the city.', alt: 'A person holding a ZAX BOOST can in an urban night setting', pos: '60% 50%', posm: '60% 50%' },
+  'studio-reflective.jpg': { type: 'frame', dir: 'up', eyebrow: 'Studio', title: 'Black on black.', text: 'One can. One light.', alt: 'A single ZAX BOOST can on a black reflective surface under a golden spotlight' },
+  'two-cans-depth.jpg': { type: 'frame', dir: 'left', eyebrow: 'Depth', title: 'Front and back.', text: 'Two cans, two angles.', alt: 'Two ZAX BOOST cans at different angles, one in the foreground and one behind' }
+};
+const optionalSlides = () => Object.keys(OPTIONAL).filter(f => fs.existsSync(path.join(__dirname, 'assets/images', f))).map(f => Object.assign({ file: f }, OPTIONAL[f]));
+const slider = (up, id, slides, label) => {
+  const all = slides.concat(optionalSlides());
+  const iv = 6500;
+  return '<div class="slider" data-slider data-interval="' + iv + '" role="region" aria-roledescription="carousel" aria-label="' + label + '" tabindex="0">' +
+    '<div class="slides">' + all.map((s, i) => '<article class="slide fx-' + s.type + '" data-dir="' + s.dir + '" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + ' of ' + all.length + '"' + (i ? '' : ' data-first') + '>' +
+      '<div class="slide-bg"><img src="' + up + 'assets/images/' + s.file + '" alt="" loading="lazy"' + (s.pos ? ' style="--pos:' + s.pos + (s.posm ? ';--posm:' + s.posm : '') + '"' : '') + ' draggable="false"></div>' +
+      '<div class="slide-copy"><div class="eyebrow">' + s.eyebrow + '</div><h3>' + s.title + '</h3><p>' + s.text + '</p></div>' +
+      (s.type === 'frame' ? '<div class="slide-fg"><div class="plx"><img src="' + up + 'assets/images/' + s.file + '" alt="' + s.alt + '" loading="lazy" draggable="false"></div></div>' : '<span class="visually-hidden">' + s.alt + '</span>') +
+      '</article>').join('') + '</div>' +
+    '<div class="slider-ui"><div class="slider-count" aria-live="off"><b data-cur>01</b><span>/ ' + String(all.length).padStart(2, '0') + '</span></div>' +
+    '<div class="slider-bars" role="tablist" aria-label="Choose slide">' + all.map((s, i) => '<button type="button" role="tab" class="bar" aria-label="Slide ' + (i + 1) + ': ' + s.title + '"><i></i></button>').join('') + '</div>' +
+    '<div class="slider-ctrl"><button type="button" data-slide="prev" aria-label="Previous slide">←</button><button type="button" data-slide="next" aria-label="Next slide">→</button></div></div></div>';
+};
+const HOME_SLIDES = [
+  { file: 'product-on-ice.png', type: 'frame', dir: 'left', eyebrow: 'Ice cold', title: 'Chilled.', text: 'Best served cold. The can looks as sharp in the ice as it does in your hand.', alt: 'A ZAX BOOST can resting on ice' },
+  { file: 'product-pedestal.png', type: 'frame', dir: 'up', eyebrow: 'Studio', title: 'Stripped back.', text: 'Black, gold and nothing else. One can on stone, one beam of light.', alt: 'A ZAX BOOST can on a black stone pedestal with a ring of golden light' },
+  { file: 'ice-splash-action.png', type: 'frame', dir: 'right', eyebrow: 'In motion', title: 'Cold, loud, fast.', text: 'Ice, liquid and a can caught mid-air.', alt: 'A ZAX BOOST can mid-air with ice cubes and a golden splash' },
+  { file: 'double-can-splash.png', type: 'frame', dir: 'left', eyebrow: 'Together', title: 'Double up.', text: 'Two cans, one idea: boost, charge, repeat.', alt: 'Two ZAX BOOST cans at angles in a golden liquid splash' },
+  { file: 'home-section-2.png', type: 'frame', dir: 'up', eyebrow: 'Made to be noticed', title: 'Fresh pour.', text: 'A cold can, a gold bolt, condensation catching the light.', alt: 'A ZAX BOOST can with golden liquid running down its sides' }
 ];
-const rail = up => `<div class="rail-wrap"><div class="rail" tabindex="0" aria-label="Campaign gallery, scroll horizontally">${railItems.map(([f, ar, cap, alt]) => `<figure class="rail-item"${f.startsWith('hero') ? ' style="--op:78% 50%"' : ''}><img src="${up}assets/images/${f}" alt="${alt}" loading="lazy" draggable="false"><figcaption>${cap}</figcaption></figure>`).join('')}</div></div>`;
+const PRODUCT_SLIDES = [
+  { file: 'macro-can-detail.png', type: 'frame', dir: 'right', eyebrow: 'Close-up', title: 'The detail.', text: 'Brushed aluminium, a pull tab, cold condensation.', alt: 'Macro close-up of a ZAX BOOST can lid and condensation' },
+  { file: 'hands-toasting.png', type: 'frame', dir: 'left', eyebrow: 'Together', title: 'Make it a moment.', text: 'Cans up. Cheers.', alt: 'Two hands toasting ZAX BOOST cans' },
+  { file: 'splash-ad-2.png', type: 'wide', dir: 'up', eyebrow: 'On the label', title: 'Boost. Charge. Repeat.', text: 'Stimulant drink, 250 ml.', alt: 'A ZAX BOOST can tilted in a golden splash on black rock', pos: '72% 50%', posm: '78% 50%' }
+];
 const stage = up => `<div class="sc-visual reveal rv-scale" data-tilt>
   <div class="sc-border"><div class="sc-frame"><img src="${up}assets/images/can-renders.jpg" alt="Two ZAX BOOST cans bursting through golden liquid on black" width="1080" height="1080" loading="lazy"><span class="sc-sweep" aria-hidden="true"></span></div></div>
   <div class="sc-tag t1"><b>250 ml</b><small>Net volume</small></div>
@@ -92,19 +115,25 @@ const stage = up => `<div class="sc-visual reveal rv-scale" data-tilt>
   <svg class="ring-text" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="rp" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#rp" textLength="286" lengthAdjust="spacing">Boost · Charge · Repeat · Zaxy ·</textPath></text></svg>
 </div>`;
 
+// Floating can for the home "Power your moment" section.
+// Drop a transparent PNG at assets/images/can-transparent.png and rebuild to use it; until then the black-backed render is screen-blended so its black vanishes.
+const floatCan = up => {
+  const real = fs.existsSync(path.join(__dirname, 'assets/images/can-transparent.png'));
+  const src = real ? 'can-transparent.png' : 'can-renders.jpg';
+  return '<div class="can-hero"><div class="can-glow" aria-hidden="true"></div><div class="can-floor" aria-hidden="true"></div>' +
+    '<img class="can-img' + (real ? '' : ' is-blend') + '" src="' + up + 'assets/images/' + src + '" alt="ZAX BOOST stimulant drink cans, black and gold" width="1080" height="1080" loading="lazy"></div>';
+};
+
 const pages = [];
 
 // ---------- HOME ----------
 pages.push({
-  dir: '', key: '', preload: 'hero-splash-1.png', title: 'ZAX BOOST | Ignite Your Infinite Potential',
+  dir: '', key: '', title: 'ZAX BOOST | Ignite Your Infinite Potential',
   desc: 'ZAX BOOST stimulant drink — ginseng, taurine, caffeine and vitamins. Too cool. Too Zaxy. Made in Pakistan.',
   body: up => `
 <section class="hero" id="top">
-  <div class="hero-still"><img src="assets/images/hero-splash-1.png" alt="A ZAX BOOST can erupting from golden liquid and black rock" fetchpriority="high" width="2057" height="765"></div>
-  <div class="hero-video-wrap" aria-hidden="true"><video class="hero-video" data-hero autoplay muted loop playsinline preload="auto" poster="assets/images/hero-splash-1.png" tabindex="-1"><source src="assets/videos/video-a.mp4" type="video/mp4"></video></div>
-  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true"><i class="hb-glow"></i><i class="hb-lines"></i><i class="hb-geo"></i><i class="hb-vignette"></i></div>
   <div class="hero-word" aria-hidden="true" data-speed=".1">ZAX</div>
-  <canvas id="sparks" aria-hidden="true"></canvas>
   <div class="wrap"><div class="hero-copy">
     <div class="eyebrow">Stimulant Drink · 250 ml</div>
     <h1 data-split data-now>Too cool.<br><em class="shine" style="font-style:normal">Too Zaxy.</em></h1>
@@ -142,7 +171,7 @@ ${ribbons}
       <p class="reveal d1" style="margin-top:26px;max-width:30em;font-size:1.1rem">One can. 250 ml. Black and gold packaging with the lightning bolt front and centre, ready to go.</p>
       <div class="btn-row reveal d2"><a class="btn" href="product/">See the product</a><a class="btn ghost" href="#ingredients">What's inside</a></div>
     </div>
-    ${stage('')}
+    ${floatCan('')}
   </div>
 </section>
 
@@ -154,16 +183,12 @@ ${ribbons}
   <span class="tag">ZAX BOOST — film</span>
 </section>
 
-<section class="section" style="padding-bottom:clamp(60px,8vw,110px)">
-  <div class="wrap rail-head">
-    <div><div class="eyebrow">The campaign</div><h2 data-split>Seen it<br><span class="gold">yet?</span></h2></div>
-    <div class="rail-ctrl"><button type="button" data-rail="prev" aria-label="Previous images">←</button><button type="button" data-rail="next" aria-label="Next images">→</button></div>
-  </div>
-  ${rail('')}
+<section class="section campaign"><div class="wrap"><div class="eyebrow">The campaign</div><h2 data-split>Five looks.<br><span class="gold">One can.</span></h2></div>
+  ${slider('', 'home', HOME_SLIDES, 'ZAX BOOST campaign')}
 </section>
 
 <section class="section ingredients cut-both" id="ingredients" style="margin-block:calc(var(--cut) * -.5)">
-  ${lazyVid('video-c.mp4', 'hero-splash-1.png')}
+  ${lazyVid('video-c.mp4', 'ice-splash-action.png')}
   <div class="wrap">
     <div class="ingr-head">
       <div><div class="eyebrow">Zaxy inside</div><h2 data-split>Four things.<br><span class="metal">One can.</span></h2></div>
@@ -174,13 +199,12 @@ ${ribbons}
 </section>
 
 <section class="moment">
-  <div class="bgimg-wrap" data-speed="-.08"><img src="assets/images/section3.jpg" alt="Two hands toasting ZAX BOOST cans in a golden splash" loading="lazy" width="1600" height="595"></div>
+  <div class="moment-bg" aria-hidden="true"><i class="mb-edge"></i><i class="mb-core"></i><i class="mb-line"></i></div>
   <div class="wrap">
     <div class="eyebrow">Together</div>
     <h2 data-split>Make it<br>a <span class="outline">moment.</span></h2>
     <p class="reveal d2" style="max-width:26em;font-size:1.15rem;color:#ddd;margin-top:22px">Cold cans. Good company. Cheers.</p>
   </div>
-  <img class="polaroid reveal rv-scale" src="assets/images/hands-toasting.png" alt="Hands toasting two ZAX BOOST cans" loading="lazy" width="394" height="518">
 </section>
 
 <section class="section panel-gold cut-top" style="margin-top:calc(var(--cut) * -1);padding-top:calc(var(--cut) + clamp(60px,9vw,130px))">
@@ -192,7 +216,7 @@ ${ribbons}
       <p class="reveal d1" style="margin-top:24px;max-width:32em;font-size:1.15rem">ZAX BOOST is made in Pakistan and is looking for operational partners across the country. If you have the capacity, we want to hear from you.</p>
       <div class="btn-row reveal d2"><a class="btn dark" href="distributor/">Become a Distributor</a></div>
     </div>
-    <div class="frame reveal rv-scale" style="aspect-ratio:381/518"><img src="assets/images/product-pedestal.png" alt="ZAX BOOST can on a black stone pedestal" loading="lazy" width="381" height="518"></div>
+    <div class="frame reveal rv-scale" style="aspect-ratio:424/498"><img src="assets/images/macro-can-detail.png" alt="Close-up of a cold ZAX BOOST can lid with condensation" loading="lazy" width="424" height="498"></div>
   </div>
 </section>
 ${ctaBand('')}`
@@ -233,12 +257,9 @@ ${pageHero(up, 'Signature product', 'ZAX <span class="shine" style="font-style:n
     <p class="reveal d2" style="margin-top:24px;font-size:.9rem">Detailed nutritional information and ingredient quantities have not been published; we only show what's on the packaging.</p>
   </div>
 </div></section>
-<section class="section" style="padding-bottom:clamp(60px,8vw,110px)">
-  <div class="wrap rail-head"><div><div class="eyebrow">Gallery</div><h2 data-split>The can,<br>every angle.</h2></div>
-  <div class="rail-ctrl"><button type="button" data-rail="prev" aria-label="Previous images">←</button><button type="button" data-rail="next" aria-label="Next images">→</button></div></div>
-  ${rail(up)}
+<section class="section campaign"><div class="wrap"><div class="eyebrow">Gallery</div><h2 data-split>The can,<br>every angle.</h2></div>
+  ${slider(up, 'product', PRODUCT_SLIDES, 'ZAX BOOST product gallery')}
 </section>
-<section class="cine" style="min-height:80vh"><img class="bgimg" src="${up}assets/images/hero-splash-1.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:78% 50%" data-speed="-.05"><div class="wrap"><h2 data-split>Boost. Charge.<br><span class="shine">Repeat.</span></h2></div></section>
 ${ctaBand(up)}`
 });
 

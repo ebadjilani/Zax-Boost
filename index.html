@@ -9,7 +9,7 @@
 <meta property="og:image" content="assets/images/hero-splash-1.png">
 <meta name="theme-color" content="#050505">
 <link rel="icon" href="assets/images/logo.png">
-<link rel="preload" as="image" href="assets/images/hero-splash-1.png" fetchpriority="high">
+
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -32,11 +32,8 @@
 <main id="main">
 
 <section class="hero" id="top">
-  <div class="hero-still"><img src="assets/images/hero-splash-1.png" alt="A ZAX BOOST can erupting from golden liquid and black rock" fetchpriority="high" width="2057" height="765"></div>
-  <div class="hero-video-wrap" aria-hidden="true"><video class="hero-video" data-hero autoplay muted loop playsinline preload="auto" poster="assets/images/hero-splash-1.png" tabindex="-1"><source src="assets/videos/video-a.mp4" type="video/mp4"></video></div>
-  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true"><i class="hb-glow"></i><i class="hb-lines"></i><i class="hb-geo"></i><i class="hb-vignette"></i></div>
   <div class="hero-word" aria-hidden="true" data-speed=".1">ZAX</div>
-  <canvas id="sparks" aria-hidden="true"></canvas>
   <div class="wrap"><div class="hero-copy">
     <div class="eyebrow">Stimulant Drink · 250 ml</div>
     <h1 data-split data-now>Too cool.<br><em class="shine" style="font-style:normal">Too Zaxy.</em></h1>
@@ -77,13 +74,7 @@
       <p class="reveal d1" style="margin-top:26px;max-width:30em;font-size:1.1rem">One can. 250 ml. Black and gold packaging with the lightning bolt front and centre, ready to go.</p>
       <div class="btn-row reveal d2"><a class="btn" href="product/">See the product</a><a class="btn ghost" href="#ingredients">What's inside</a></div>
     </div>
-    <div class="sc-visual reveal rv-scale" data-tilt>
-  <div class="sc-border"><div class="sc-frame"><img src="assets/images/can-renders.jpg" alt="Two ZAX BOOST cans bursting through golden liquid on black" width="1080" height="1080" loading="lazy"><span class="sc-sweep" aria-hidden="true"></span></div></div>
-  <div class="sc-tag t1"><b>250 ml</b><small>Net volume</small></div>
-  <div class="sc-tag t2"><b>Stimulant drink</b><small>On the can</small></div>
-  <div class="sc-tag t3"><b>Ginseng · Taurine · Caffeine · Vitamins</b></div>
-  <svg class="ring-text" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="rp" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#rp" textLength="286" lengthAdjust="spacing">Boost · Charge · Repeat · Zaxy ·</textPath></text></svg>
-</div>
+    <div class="can-hero"><div class="can-glow" aria-hidden="true"></div><div class="can-floor" aria-hidden="true"></div><img class="can-img" src="assets/images/can-transparent.png" alt="ZAX BOOST stimulant drink cans, black and gold" width="1080" height="1080" loading="lazy"></div>
   </div>
 </section>
 
@@ -95,16 +86,12 @@
   <span class="tag">ZAX BOOST — film</span>
 </section>
 
-<section class="section" style="padding-bottom:clamp(60px,8vw,110px)">
-  <div class="wrap rail-head">
-    <div><div class="eyebrow">The campaign</div><h2 data-split>Seen it<br><span class="gold">yet?</span></h2></div>
-    <div class="rail-ctrl"><button type="button" data-rail="prev" aria-label="Previous images">←</button><button type="button" data-rail="next" aria-label="Next images">→</button></div>
-  </div>
-  <div class="rail-wrap"><div class="rail" tabindex="0" aria-label="Campaign gallery, scroll horizontally"><figure class="rail-item" style="--op:78% 50%"><img src="assets/images/hero-splash-1.png" alt="ZAX BOOST can erupting from golden liquid and black rock" loading="lazy" draggable="false"><figcaption>Golden eruption</figcaption></figure><figure class="rail-item"><img src="assets/images/double-can-splash.png" alt="Two ZAX BOOST cans in a liquid splash" loading="lazy" draggable="false"><figcaption>Double up</figcaption></figure><figure class="rail-item"><img src="assets/images/macro-can-detail.png" alt="Close-up of a cold ZAX BOOST can lid" loading="lazy" draggable="false"><figcaption>The detail</figcaption></figure><figure class="rail-item"><img src="assets/images/hands-toasting.png" alt="Two hands toasting ZAX BOOST cans" loading="lazy" draggable="false"><figcaption>Make it a moment</figcaption></figure><figure class="rail-item"><img src="assets/images/product-pedestal.png" alt="ZAX BOOST can on a black stone pedestal" loading="lazy" draggable="false"><figcaption>On the rocks</figcaption></figure><figure class="rail-item"><img src="assets/images/ice-splash-action.png" alt="ZAX BOOST can mid-splash with ice cubes" loading="lazy" draggable="false"><figcaption>Ice cold</figcaption></figure><figure class="rail-item"><img src="assets/images/product-on-ice.png" alt="ZAX BOOST can on ice with golden splash" loading="lazy" draggable="false"><figcaption>Chilled</figcaption></figure></div></div>
+<section class="section campaign"><div class="wrap"><div class="eyebrow">The campaign</div><h2 data-split>Five looks.<br><span class="gold">One can.</span></h2></div>
+  <div class="slider" data-slider data-interval="6500" role="region" aria-roledescription="carousel" aria-label="ZAX BOOST campaign" tabindex="0"><div class="slides"><article class="slide fx-frame" data-dir="left" role="group" aria-roledescription="slide" aria-label="1 of 5" data-first><div class="slide-bg"><img src="assets/images/product-on-ice.png" alt="" loading="lazy" draggable="false"></div><div class="slide-copy"><div class="eyebrow">Ice cold</div><h3>Chilled.</h3><p>Best served cold. The can looks as sharp in the ice as it does in your hand.</p></div><div class="slide-fg"><div class="plx"><img src="assets/images/product-on-ice.png" alt="A ZAX BOOST can resting on ice" loading="lazy" draggable="false"></div></div></article><article class="slide fx-frame" data-dir="up" role="group" aria-roledescription="slide" aria-label="2 of 5"><div class="slide-bg"><img src="assets/images/product-pedestal.png" alt="" loading="lazy" draggable="false"></div><div class="slide-copy"><div class="eyebrow">Studio</div><h3>Stripped back.</h3><p>Black, gold and nothing else. One can on stone, one beam of light.</p></div><div class="slide-fg"><div class="plx"><img src="assets/images/product-pedestal.png" alt="A ZAX BOOST can on a black stone pedestal with a ring of golden light" loading="lazy" draggable="false"></div></div></article><article class="slide fx-frame" data-dir="right" role="group" aria-roledescription="slide" aria-label="3 of 5"><div class="slide-bg"><img src="assets/images/ice-splash-action.png" alt="" loading="lazy" draggable="false"></div><div class="slide-copy"><div class="eyebrow">In motion</div><h3>Cold, loud, fast.</h3><p>Ice, liquid and a can caught mid-air.</p></div><div class="slide-fg"><div class="plx"><img src="assets/images/ice-splash-action.png" alt="A ZAX BOOST can mid-air with ice cubes and a golden splash" loading="lazy" draggable="false"></div></div></article><article class="slide fx-frame" data-dir="left" role="group" aria-roledescription="slide" aria-label="4 of 5"><div class="slide-bg"><img src="assets/images/double-can-splash.png" alt="" loading="lazy" draggable="false"></div><div class="slide-copy"><div class="eyebrow">Together</div><h3>Double up.</h3><p>Two cans, one idea: boost, charge, repeat.</p></div><div class="slide-fg"><div class="plx"><img src="assets/images/double-can-splash.png" alt="Two ZAX BOOST cans at angles in a golden liquid splash" loading="lazy" draggable="false"></div></div></article><article class="slide fx-frame" data-dir="up" role="group" aria-roledescription="slide" aria-label="5 of 5"><div class="slide-bg"><img src="assets/images/home-section-2.png" alt="" loading="lazy" draggable="false"></div><div class="slide-copy"><div class="eyebrow">Made to be noticed</div><h3>Fresh pour.</h3><p>A cold can, a gold bolt, condensation catching the light.</p></div><div class="slide-fg"><div class="plx"><img src="assets/images/home-section-2.png" alt="A ZAX BOOST can with golden liquid running down its sides" loading="lazy" draggable="false"></div></div></article></div><div class="slider-ui"><div class="slider-count" aria-live="off"><b data-cur>01</b><span>/ 05</span></div><div class="slider-bars" role="tablist" aria-label="Choose slide"><button type="button" role="tab" class="bar" aria-label="Slide 1: Chilled."><i></i></button><button type="button" role="tab" class="bar" aria-label="Slide 2: Stripped back."><i></i></button><button type="button" role="tab" class="bar" aria-label="Slide 3: Cold, loud, fast."><i></i></button><button type="button" role="tab" class="bar" aria-label="Slide 4: Double up."><i></i></button><button type="button" role="tab" class="bar" aria-label="Slide 5: Fresh pour."><i></i></button></div><div class="slider-ctrl"><button type="button" data-slide="prev" aria-label="Previous slide">←</button><button type="button" data-slide="next" aria-label="Next slide">→</button></div></div></div>
 </section>
 
 <section class="section ingredients cut-both" id="ingredients" style="margin-block:calc(var(--cut) * -.5)">
-  <video class="bgvid" muted loop playsinline preload="none" poster="assets/images/hero-splash-1.png" data-src="assets/videos/video-c.mp4" aria-hidden="true" tabindex="-1"></video>
+  <video class="bgvid" muted loop playsinline preload="none" poster="assets/images/ice-splash-action.png" data-src="assets/videos/video-c.mp4" aria-hidden="true" tabindex="-1"></video>
   <div class="wrap">
     <div class="ingr-head">
       <div><div class="eyebrow">Zaxy inside</div><h2 data-split>Four things.<br><span class="metal">One can.</span></h2></div>
@@ -115,13 +102,12 @@
 </section>
 
 <section class="moment">
-  <div class="bgimg-wrap" data-speed="-.08"><img src="assets/images/section3.jpg" alt="Two hands toasting ZAX BOOST cans in a golden splash" loading="lazy" width="1600" height="595"></div>
+  <div class="moment-bg" aria-hidden="true"><i class="mb-edge"></i><i class="mb-core"></i><i class="mb-line"></i></div>
   <div class="wrap">
     <div class="eyebrow">Together</div>
     <h2 data-split>Make it<br>a <span class="outline">moment.</span></h2>
     <p class="reveal d2" style="max-width:26em;font-size:1.15rem;color:#ddd;margin-top:22px">Cold cans. Good company. Cheers.</p>
   </div>
-  <img class="polaroid reveal rv-scale" src="assets/images/hands-toasting.png" alt="Hands toasting two ZAX BOOST cans" loading="lazy" width="394" height="518">
 </section>
 
 <section class="section panel-gold cut-top" style="margin-top:calc(var(--cut) * -1);padding-top:calc(var(--cut) + clamp(60px,9vw,130px))">
@@ -133,7 +119,7 @@
       <p class="reveal d1" style="margin-top:24px;max-width:32em;font-size:1.15rem">ZAX BOOST is made in Pakistan and is looking for operational partners across the country. If you have the capacity, we want to hear from you.</p>
       <div class="btn-row reveal d2"><a class="btn dark" href="distributor/">Become a Distributor</a></div>
     </div>
-    <div class="frame reveal rv-scale" style="aspect-ratio:381/518"><img src="assets/images/product-pedestal.png" alt="ZAX BOOST can on a black stone pedestal" loading="lazy" width="381" height="518"></div>
+    <div class="frame reveal rv-scale" style="aspect-ratio:424/498"><img src="assets/images/macro-can-detail.png" alt="Close-up of a cold ZAX BOOST can lid with condensation" loading="lazy" width="424" height="498"></div>
   </div>
 </section>
 
