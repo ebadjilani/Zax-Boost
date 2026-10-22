@@ -172,26 +172,17 @@ section{position:relative}
 .rail-item::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 40%);pointer-events:none}
 
 /* ingredients */
-.ingredients{background:var(--black);overflow:hidden}
-.ingredients .bgvid{opacity:.4;mix-blend-mode:screen}
-.ingredients::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--black) 0,rgba(10,10,10,.6) 55%,rgba(10,10,10,.85));pointer-events:none}
 .ingredients .wrap{z-index:2}
 
 /* lifestyle */
-.moment{min-height:110vh;display:flex;align-items:center;overflow:hidden;background:#000}
-.moment>.bgimg-wrap{position:absolute;inset:-8% 0}
-.moment>.bgimg-wrap img{width:100%;height:100%;object-fit:cover;object-position:70% 50%}
-.moment::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.9),rgba(5,5,5,.1) 70%),linear-gradient(0deg,var(--obsidian),transparent 25%)}
 .moment .wrap{z-index:2}
 .moment h2{font-size:clamp(3.4rem,12vw,11rem)}
-.moment .polaroid{position:absolute;right:var(--gutter);bottom:-60px;width:clamp(150px,20vw,260px);z-index:3;border:1px solid rgba(255,255,255,.2);box-shadow:0 30px 60px rgba(0,0,0,.6);transform:rotate(4deg)}
 
 /* distributor / gold panel */
 .panel-gold{background:var(--metal);color:#050505;overflow:hidden}
 .panel-gold p{color:rgba(5,5,5,.75)}
 .panel-gold .eyebrow{color:#050505}.panel-gold .eyebrow::before{background:#050505}
 .panel-gold .bg-word{-webkit-text-stroke:1px rgba(0,0,0,.14);font-size:clamp(9rem,26vw,24rem);right:-4vw;bottom:-6vw}
-.panel-gold .frame{max-width:420px;margin-inline:auto;box-shadow:0 40px 80px rgba(0,0,0,.45);transform:rotate(2.5deg)}
 .rule{height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform 1.4s var(--ease)}
 .rule.in{transform:none}
 .no-js .rule{transform:none}
@@ -291,7 +282,6 @@ form.card{background:var(--panel);border:1px solid var(--line);padding:clamp(24p
   .rail-item{width:68vw}
   .cine::after{background:linear-gradient(0deg,rgba(5,5,5,.9),rgba(5,5,5,.2) 70%)}
   .cine{align-items:flex-end;padding-bottom:70px}
-  .moment .polaroid{display:none}
   .to-top{right:14px;bottom:14px}
 }
 @media (max-width:560px){
@@ -404,3 +394,29 @@ a.c-card:hover .go{transform:translate(4px,-4px)}
   .sc-tag{padding:8px 12px;max-width:180px}.sc-tag b{font-size:1.05rem}
   .sc-tag.t3 b{font-size:.8rem}
 }
+
+/* ingredients: dark minimal pattern, no video */
+.ingredients{position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 60% 70% at 88% 0%,rgba(217,154,22,.14),transparent 70%),radial-gradient(ellipse 50% 60% at 0% 100%,rgba(217,154,22,.07),transparent 70%),#080808}
+.ingredients::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(115deg,rgba(255,255,255,.03) 0 1px,transparent 1px 46px);-webkit-mask-image:radial-gradient(ellipse 80% 90% at 70% 30%,#000,transparent 75%);mask-image:radial-gradient(ellipse 80% 90% at 70% 30%,#000,transparent 75%)}
+.ingredients::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,0,0,.6))}
+
+/* "Make it a moment": plain black with soft shading */
+.moment{position:relative;min-height:84vh;display:flex;align-items:center;overflow:hidden;background:#060606;isolation:isolate}
+.moment-bg{position:absolute;inset:0;z-index:-1}
+.moment-bg i{position:absolute;inset:0;display:block}
+.mb-edge{background:radial-gradient(ellipse 45% 70% at 100% 50%,rgba(217,154,22,.16),transparent 70%),radial-gradient(ellipse 40% 60% at 0% 100%,rgba(217,154,22,.08),transparent 70%),linear-gradient(180deg,#050505 0,transparent 22%,transparent 78%,#050505 100%)}
+.mb-core{background:radial-gradient(ellipse 55% 50% at 38% 50%,rgba(255,255,255,.035),transparent 70%)}
+.mb-line{background:linear-gradient(115deg,transparent 58%,rgba(255,190,34,.12) 58.15%,transparent 58.4%),linear-gradient(115deg,transparent 64%,rgba(255,255,255,.05) 64.1%,transparent 64.3%)}
+.moment .wrap{z-index:2}
+.moment h2{font-size:clamp(3.4rem,12vw,11rem)}
+
+/* "Born here": slow floating can */
+.can-float{position:relative;width:min(680px,115%);aspect-ratio:1;margin-inline:auto;display:grid;place-items:center}
+.can-shade{position:absolute;inset:0;background:radial-gradient(circle at 50% 46%,rgba(255,244,214,.6),rgba(255,244,214,0) 62%);animation:canGlow 5.5s ease-in-out infinite}
+.can-shade::after{content:"";position:absolute;left:24%;right:24%;bottom:6%;height:6%;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.4),transparent 70%);animation:canFloor 5.5s ease-in-out infinite}
+.can-img{position:relative;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 26px 24px rgba(0,0,0,.3));animation:canFloat 5.5s ease-in-out infinite}
+@keyframes canFloat{0%,100%{transform:translateY(7px) rotate(-1.2deg)}50%{transform:translateY(-9px) rotate(1.2deg)}}
+@keyframes canGlow{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes canFloor{0%,100%{opacity:.9;transform:scaleX(1)}50%{opacity:.5;transform:scaleX(.88)}}
+@media (max-width:960px){.moment{min-height:64vh}.can-float{width:min(480px,100%)}}
+@media (prefers-reduced-motion:reduce){.can-img,.can-shade,.can-shade::after{animation:none!important}}

@@ -92,6 +92,10 @@ const stage = up => `<div class="sc-visual reveal rv-scale" data-tilt>
   <svg class="ring-text" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="rp" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#rp" textLength="286" lengthAdjust="spacing">Boost · Charge · Repeat · Zaxy ·</textPath></text></svg>
 </div>`;
 
+// Floating can for the "Born here" panel. Save your own transparent PNG as assets/images/can-transparent.png to override the generated cutout.
+const canSrc = fs.existsSync(path.join(__dirname, 'assets/images/can-transparent.png')) ? 'can-transparent.png' : 'can-cutout.png';
+const floatCan = up => '<div class="can-float"><div class="can-shade" aria-hidden="true"></div><img class="can-img" src="' + up + 'assets/images/' + canSrc + '" alt="ZAX BOOST stimulant drink cans, black and gold" width="1080" height="1080" loading="lazy"></div>';
+
 const pages = [];
 
 // ---------- HOME ----------
@@ -163,7 +167,6 @@ ${ribbons}
 </section>
 
 <section class="section ingredients cut-both" id="ingredients" style="margin-block:calc(var(--cut) * -.5)">
-  ${lazyVid('video-c.mp4', 'hero-splash-1.png')}
   <div class="wrap">
     <div class="ingr-head">
       <div><div class="eyebrow">Zaxy inside</div><h2 data-split>Four things.<br><span class="metal">One can.</span></h2></div>
@@ -174,13 +177,12 @@ ${ribbons}
 </section>
 
 <section class="moment">
-  <div class="bgimg-wrap" data-speed="-.08"><img src="assets/images/section3.jpg" alt="Two hands toasting ZAX BOOST cans in a golden splash" loading="lazy" width="1600" height="595"></div>
+  <div class="moment-bg" aria-hidden="true"><i class="mb-edge"></i><i class="mb-core"></i><i class="mb-line"></i></div>
   <div class="wrap">
     <div class="eyebrow">Together</div>
     <h2 data-split>Make it<br>a <span class="outline">moment.</span></h2>
     <p class="reveal d2" style="max-width:26em;font-size:1.15rem;color:#ddd;margin-top:22px">Cold cans. Good company. Cheers.</p>
   </div>
-  <img class="polaroid reveal rv-scale" src="assets/images/hands-toasting.png" alt="Hands toasting two ZAX BOOST cans" loading="lazy" width="394" height="518">
 </section>
 
 <section class="section panel-gold cut-top" style="margin-top:calc(var(--cut) * -1);padding-top:calc(var(--cut) + clamp(60px,9vw,130px))">
@@ -192,7 +194,7 @@ ${ribbons}
       <p class="reveal d1" style="margin-top:24px;max-width:32em;font-size:1.15rem">ZAX BOOST is made in Pakistan and is looking for operational partners across the country. If you have the capacity, we want to hear from you.</p>
       <div class="btn-row reveal d2"><a class="btn dark" href="distributor/">Become a Distributor</a></div>
     </div>
-    <div class="frame reveal rv-scale" style="aspect-ratio:381/518"><img src="assets/images/product-pedestal.png" alt="ZAX BOOST can on a black stone pedestal" loading="lazy" width="381" height="518"></div>
+    ${floatCan('')}
   </div>
 </section>
 ${ctaBand('')}`
